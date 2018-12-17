@@ -16,16 +16,14 @@ def get_data(location, post_code):
     from collections import defaultdict
     
     data  = defaultdict(list)
-    #headers = ({'User-Agent':'Mozilla/5.0 (Windows NT 6.1) 
-    #                         AppleWebKit/537.36 (KHTML, like Gecko)
-    #                         Chrome/70.0.3538.110 Safari/537.36'})
+    headers = ({'User-Agent':'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'})
     url = 'https://www.realestate.com.au/buy/property-house-in-{loc},+nsw+{code}/list-'.format(loc=location, code=post_code)
     
     n_pages = 0
 
     for page in range(0,40):
         n_pages += 1
-        response = get(url+str(n_pages))
+        response = get(url+str(n_pages), headers= headers)
         html_soup = BeautifulSoup(response.text, 'html.parser')
 
         house_containers = html_soup.find_all('div', class_="residential-card__content")

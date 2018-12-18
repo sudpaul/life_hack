@@ -52,3 +52,7 @@ def historical_rate(date):
     
             
     return get_data(date)
+
+def all_symbols():
+    
+    return get_data("symbols")

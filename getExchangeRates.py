@@ -6,7 +6,19 @@ Created on Tue Dec 18 14:44:57 2018
 """
 def api_key(file_name):
     
-     
+    '''Input is api file and return the access key
+   
+    Parameters
+    ----------
+    file_name : str 
+               api file name
+    Returns
+    ----------
+     key : str
+           api access key
+           
+    '''
+        
     with open(file_name) as f:
         key = f.read().strip()
     
@@ -14,12 +26,30 @@ def api_key(file_name):
 
 
 
-def get_data(parameter):
+def get_data(date):
     
+    '''
+    
+    Parameters
+    ----------
+    date : str 
+           date format YYYY-MM-DD
+    Returns
+    ----------
+    status_code : str
+                http respone status code for unsuccessful request  
+           
+    data  : str 
+            successful response json data 
+    
+    error : int
+            http failure 0
+            
+    '''
     import requests
-   
+    
     key = api_key('fixer_io.txt')
-    base_url ="http://data.fixer.io/api/{find}?access_key={k}".format(find=parameter,k=key)
+    base_url ="http://data.fixer.io/api/{find}?access_key={k}".format(find=date,k=key)
     
         
     try:

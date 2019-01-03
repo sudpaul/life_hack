@@ -69,7 +69,7 @@ def get_data(date):
           return 0
     
 def exchange_rate():
-    
+    '''Return latest exchange rate of 168 currencies base currency ERU'''
     
     return get_data('latest')
    
@@ -79,8 +79,17 @@ def exchange_rate():
     
       
 def historical_rate(date):
-    
-            
+    '''Input is date and return historical rate exchange rate of 168 currencies
+    base currency ERU
+    Parameters
+    ----------
+    date : str 
+           date format YYYY-MM-DD
+    Returns
+    ----------
+    data : str
+           json response data
+    '''    
     return get_data(date)
 
 def all_symbols():

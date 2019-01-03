@@ -93,5 +93,5 @@ def historical_rate(date):
     return get_data(date)
 
 def all_symbols():
-    
+    '''Return all 168 currency symbols from the api call'''
     return get_data("symbols")

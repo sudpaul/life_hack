@@ -53,8 +53,10 @@ def web_browser(url):
     scopus = driver.find_element_by_class_name('external')
     scopus.click()
 
-    driver.close()
+    
 
 
 
 url = 'https://www.scival.com/customer/authenticate/loginfull'
+
+web_browser(url)

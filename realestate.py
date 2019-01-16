@@ -74,3 +74,16 @@ def get_data(location, post_code):
     return df
    
 
+def clean_data(df):
+    
+    def get_price(series):
+        
+        import re
+        import numpy as np
+        try:
+            prices = re.findall(r'\$(.*)',series)
+            return (int(p) for p in prices)
+        except:
+            return np.nan
+    
+    

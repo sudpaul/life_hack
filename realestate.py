@@ -72,18 +72,46 @@ def get_data(location, post_code):
     print('You scraped {} pages containing {} properties.'.format(n_pages, df.shape[0]))
     
     return df
+
+def get_price(series):
+     
+    import re
+    import numpy as np    
+     
+    def clean_price(string):
+            
+          num = re.sub('[^\d]','', string)
+          
+          return int(num.strip())
+        
+    if '$' in series:
+        match = re.findall(r'\$.*',series)
+        value = match[0]
+          
+        if '-' in value:     
+            p1, p2 = value.split('-')
+            price = round((clean_price(p1) + clean_price(p2))/2, 0)
+            return int(price)
+            
+        else:
+            return clean_price(value)
+             
+    return np.nan
    
 
 def clean_data(df):
     
-    def get_price(series):
+    import pandas as pd
+    
+    df['beds'] = pd.to_numeric(df['beds'], errors='coerce')
+    df['baths'] = pd.to_numeric(df['baths'], errors='coerce')
+    df['parking'] = pd.to_numeric(df['parking'], errors='coerce')
+    df['size_m2'] = pd.to_numeric(df['size'], errors = 'coerce')
+    
+    df['price'] = df['price'].apply(get_price)
+    
+   
         
-        import re
-        import numpy as np
-        try:
-            prices = re.findall(r'\$(.*)',series)
-            return (int(p) for p in prices)
-        except:
-            return np.nan
+        
     
     

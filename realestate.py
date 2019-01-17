@@ -119,11 +119,10 @@ def get_lat_lon(location):
     
     if location.startswith('Address available on request'):
         location = location.replace('Address available on request,', '')
-    
-    location = location + ' NSW, Australia' 
-    
-    url = f'https://maps.googleapis.com/maps/api/geocode/json?address={location}&key={token}'
+      
     try:
+        location = location + ' NSW, Australia' 
+        url = f'https://maps.googleapis.com/maps/api/geocode/json?address={location}&key={token}'
         response = requests.get(url)
         if not response.status_code == 200:
             return response.status_code, 0

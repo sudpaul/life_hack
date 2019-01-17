@@ -110,6 +110,11 @@ def clean_data(df):
     
     df['price'] = df['price'].apply(get_price)
     
+
+## To do
+#location data from geocode mapping to Google API
+
+     
    
         
         

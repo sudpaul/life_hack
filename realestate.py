@@ -111,9 +111,30 @@ def clean_data(df):
     df['price'] = df['price'].apply(get_price)
     
 
-## To do
-#location data from geocode mapping to Google API
-
+def get_lat_lon(location):
+    
+    import requests
+    with open('../google_geocode_api.txt') as f:
+        token = f.read().strip()
+    
+    if location.startswith('Address available on request'):
+        location = location.replace('Address available on request,', '')
+    
+    location = location + ' NSW, Australia' 
+    
+    url = f'https://maps.googleapis.com/maps/api/geocode/json?address={location}&key={token}'
+    try:
+        response = requests.get(url)
+        if not response.status_code == 200:
+            return response.status_code, 0
+        data = response.json()
+        lati = data['results'][0]['geometry']['location']['lat']
+        long = data['results'][0]['geometry']['location']['lng']
+    
+        return lati, long
+    except:
+        return 0.0, 0.0
+    
      
    
         

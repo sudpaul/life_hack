@@ -90,6 +90,7 @@ def get_price(series):
           return int(num.strip())
         
     if '$' in series:
+        ## To to find to capture million dollar values and change the patteren
         match = re.findall(r'\$.*',series)
         value = match[0]
           
@@ -111,11 +112,12 @@ def clean_data(df):
     df['beds'] = pd.to_numeric(df['beds'], errors='coerce')
     df['baths'] = pd.to_numeric(df['baths'], errors='coerce')
     df['parking'] = pd.to_numeric(df['parking'], errors='coerce')
+    df['size_m2'] = df['size_m2'].apply(lambda x : x.replace(',', ''))
     df['size_m2'] = pd.to_numeric(df['size_m2'], errors = 'coerce')
     
-    df['price'] = df['price'].apply(get_price)
+    #df['price'] = df['price'].apply(get_price)
     
-
+    return df
 def get_lat_lon(location):
     
     import requests

@@ -77,7 +77,12 @@ def get_price(series):
      
     import re
     import numpy as np    
-     
+    #Million dollors string check
+    #Price Guide $1.5M, $1.19 million, For Sale $1,35M - $1,45M,$1.05 million
+    #Price Guide $1.6Mil-$1.7Mil, JUST $1.95Mil, $ 1.228 Mil 
+    #re.findall(r'\$\d+\,?\d?\.?\d?', million_mask
+    #To do add '0000000 or ./, 000000 concat string 
+    #Finally clean price value
     def clean_price(string):
             
           num = re.sub('[^\d]','', string)
@@ -106,7 +111,7 @@ def clean_data(df):
     df['beds'] = pd.to_numeric(df['beds'], errors='coerce')
     df['baths'] = pd.to_numeric(df['baths'], errors='coerce')
     df['parking'] = pd.to_numeric(df['parking'], errors='coerce')
-    df['size_m2'] = pd.to_numeric(df['size'], errors = 'coerce')
+    df['size_m2'] = pd.to_numeric(df['size_m2'], errors = 'coerce')
     
     df['price'] = df['price'].apply(get_price)
     
@@ -127,10 +132,10 @@ def get_lat_lon(location):
         if not response.status_code == 200:
             return response.status_code, 0
         data = response.json()
-        lati = data['results'][0]['geometry']['location']['lat']
-        long = data['results'][0]['geometry']['location']['lng']
+        lat = data['results'][0]['geometry']['location']['lat']
+        lng = data['results'][0]['geometry']['location']['lng']
     
-        return lati, long
+        return lat, lng
     except:
         return 0.0, 0.0
     

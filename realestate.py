@@ -108,11 +108,12 @@ def get_price(series):
 def clean_data(df):
     
     import pandas as pd
-    
+    df =  df.fillna({'Price': 'missing','location': 'Unknown','beds': '0',
+                      'bath': '0','parking': '0', 'size_m2': '0'})
     df['beds'] = pd.to_numeric(df['beds'], errors='coerce')
     df['baths'] = pd.to_numeric(df['baths'], errors='coerce')
     df['parking'] = pd.to_numeric(df['parking'], errors='coerce')
-    df['size_m2'] = df['size_m2'].apply(lambda x : x.replace(',', ''))
+    df['size_m2'] = df['size_m2'].apply(lambda x : x.replace(',', '') if ',' in x else x)
     df['size_m2'] = pd.to_numeric(df['size_m2'], errors = 'coerce')
     
     #df['price'] = df['price'].apply(get_price)

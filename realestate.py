@@ -143,8 +143,11 @@ def get_lat_lon(location):
         return 0.0, 0.0
     
      
-   
-        
-        
+# Map Visualisation
+#import folium
+#from folium import plugins
+#map_obj = folium.Map(location=[151.0772631, -33.9922674], tiles='cartodbpositron', zoom_start=3.5)
+#for lat,lon in zip(data['latitude'], data['longitude']):
     
+#    folium.CircleMarker([lon, lat])
     

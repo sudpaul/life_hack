@@ -91,14 +91,15 @@ def get_price(series):
         
     if '$' in series:
         ## To to find to capture million dollar values and change the patteren
-        match = re.findall(r'\$.*',series)
+        match = re.findall(r'\$(.*)',series)
         value = match[0]
           
         if '-' in value:     
             p1, p2 = value.split('-')
             price = round((clean_price(p1) + clean_price(p2))/2, 0)
             return int(price)
-            
+        elif '.' in value:
+           # value = value.replace('.', '000000)
         else:
             return clean_price(value)
              
@@ -132,15 +133,17 @@ def get_lat_lon(location):
         url = f'https://maps.googleapis.com/maps/api/geocode/json?address={location}&key={token}'
         response = requests.get(url)
         if not response.status_code == 200:
-            return response.status_code, 0
+            return (response.status_code, None)
         data = response.json()
         lat = data['results'][0]['geometry']['location']['lat']
         lng = data['results'][0]['geometry']['location']['lng']
     
-        return lat, lng
+        return (lat, lng)
     except:
-        return 0.0, 0.0
-    
+        return (0.0, None)
+## Geocoding address to lat lon and assign to dataframe columns
+        
+data_clean[['latitude', 'longitude']] = data_clean.apply(lambda row :pd.Series(get_lat_lon(row['location'])), axis=1)    
      
 # Map Visualisation
 #import folium

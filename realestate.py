@@ -98,7 +98,7 @@ def get_price(series):
             p1, p2 = value.split('-')
             price = round((clean_price(p1) + clean_price(p2))/2, 0)
             return int(price)
-        elif '.' in value:
+        #elif '.' in value:
            # value = value.replace('.', '000000)
         else:
             return clean_price(value)
@@ -143,7 +143,7 @@ def get_lat_lon(location):
         return (0.0, None)
 ## Geocoding address to lat lon and assign to dataframe columns
         
-data_clean[['latitude', 'longitude']] = data_clean.apply(lambda row :pd.Series(get_lat_lon(row['location'])), axis=1)    
+#data_clean[['latitude', 'longitude']] = data_clean.apply(lambda row :pd.Series(get_lat_lon(row['location'])), axis=1)    
      
 # Map Visualisation
 #import folium

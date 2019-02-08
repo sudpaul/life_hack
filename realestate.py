@@ -122,7 +122,7 @@ def clean_data(df):
     df['size_m2'] = df['size_m2'].str.strip().apply(lambda x : x if x.isdigit() else x.replace(',',''))
     df['size_m2'] = pd.to_numeric(df['size_m2'], errors = 'coerce')
     
-    #df['price'] = df['price'].apply(get_price)
+    df['clean_price'] = df['price'].apply(get_price)
     return df
 def get_lat_lon(location):
     
@@ -149,7 +149,7 @@ def get_lat_lon(location):
 ## Geocoding address to lat lon and assign to dataframe columns
         
 #data_clean[['latitude', 'longitude']] = data_clean.apply(lambda row :pd.Series(get_lat_lon(row['location'])), axis=1)    
-     
+    
 # Map Visualisation
 #import folium
 #from folium import plugins
@@ -165,4 +165,5 @@ def price_m2(price, m2):
         return price/m2
     except:
         return np.nan
+#data_clean['price_m2'] = data_clean.apply(lambda x: price_m2(x['clean_price'], x['size_m2']), axis=1)
         

@@ -77,34 +77,39 @@ def get_price(series):
      
     import re
     import numpy as np    
-    #Million dollors string check
-    #Price Guide $1.5M, $1.19 million, For Sale $1,35M - $1,45M,$1.05 million
-    #Price Guide $1.6Mil-$1.7Mil, JUST $1.95Mil, $ 1.228 Mil 
-    #re.findall(r'\$\d+\,?\d?\.?\d?', million_mask
-    #To do add '0000000 or ./, 000000 concat string 
-    #Finally clean price value
+    
     def clean_price(string):
             
           num = re.sub('[^\d]','', string)
           
           return int(num.strip())
         
-    if '$' in series:
+    try :
+        if '$' in series:
         ## To to find to capture million dollar values and change the patteren
-        match = re.findall(r'\$(.*)',series)
-        value = match[0]
+           match = re.findall(r'\$(.*)',series)
+           value = match[0]     
+            #Million dollors string check
+           if '.' in value:     
+               val1 = re.search(r'(\d[\.]?\d)', value)
+               p = clean_price(val1.group())
+               price = p*100000
+               
+               return price
+           elif '-' in value:     
+                p1, p2 = value.split('-')
+                price = round((clean_price(p1) + clean_price(p2))/2, 0)
+               
+                return price
+    
+    
+           else:
+               
+               return clean_price(value)
+    except:      
           
-        if '-' in value:     
-            p1, p2 = value.split('-')
-            price = round((clean_price(p1) + clean_price(p2))/2, 0)
-            return int(price)
-        #elif '.' in value:
-           # value = value.replace('.', '000000)
-        else:
-            return clean_price(value)
-             
-    return np.nan
-   
+          return np.nan
+       
 
 def clean_data(df):
     
@@ -152,4 +157,12 @@ def get_lat_lon(location):
 #for lat,lon in zip(data['latitude'], data['longitude']):
     
 #    folium.CircleMarker([lon, lat])
+def price_m2(price, m2):
     
+    import numpy as np
+    try:
+            
+        return price/m2
+    except:
+        return np.nan
+        

@@ -35,7 +35,8 @@ def get_data(location, post_code):
                    data["price"].append(None)
                try:
                   weblink = house.find('a')
-                  data['link'].append('https://www.realestate.com.au/'+weblink.get('href'))
+                  href = 'https://www.realestate.com.au/'+weblink.get('href')
+                  data['link'].append(href)
                except:
                    data["link"].append(None)
                

@@ -33,7 +33,12 @@ def get_data(location, post_code):
                    data["price"].append(house.find_all('span', class_='property-price')[0].text)
                except:
                    data["price"].append(None)
-            
+               try:
+                  weblink = house.find('a')
+                  data['link'].append('https://www.realestate.com.au/'+weblink.get('href'))
+               except:
+                   data["link"].append(None)
+               
                try:
                    data["location"].append(house.find_all('span', class_='')[1].text)
                except:

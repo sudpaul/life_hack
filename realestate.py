@@ -154,7 +154,7 @@ def get_lat_lon(location):
         return (0.0, None)
 ## Geocoding address to lat lon and assign to dataframe columns
         
-#data_clean[['latitude', 'longitude']] = data_clean.apply(lambda row :pd.Series(get_lat_lon(row['location'])), axis=1)    
+data[['latitude', 'longitude']] = data.apply(lambda row :pd.Series(get_lat_lon(row['location'])), axis=1)    
 
 def price_m2(price, m2):
     
@@ -164,5 +164,5 @@ def price_m2(price, m2):
         return price/m2
     except:
         return np.nan
-#data_clean['price_m2'] = data_clean.apply(lambda x: price_m2(x['clean_price'], x['size_m2']), axis=1)
+data['price_m2'] = data.apply(lambda x: price_m2(x['clean_price'], x['size_m2']), axis=1)
         

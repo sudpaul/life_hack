@@ -13,7 +13,7 @@ password = '' # Your GitHub password
 
 # Note that credentials will be transmitted over a secure SSL connection
 url = 'https://api.github.com/authorizations'
-note = 'Mining the Social Web - Mining Github'
+note = 'tensorflow'
 post_data = {'scopes':['repo'],'note': note }
 
 response = requests.post(
@@ -28,7 +28,7 @@ print("Your OAuth token is", response.json()['token'])
 
 
 # An unauthenticated request that doesn't contain an ?access_token=xxx query string
-url = "https://api.github.com/repos/ptwobrussell/Mining-the-Social-Web/stargazers"
+url = "https://api.github.com/repos/tensorflow/tensorflow"
 response = requests.get(url)
 
 # Display one stargazer
@@ -108,33 +108,3 @@ for sg in stargazers:
     g.add_edge(sg.login + '(user)', repo.name + '(repo)', type='gazes')
 
 
-print(g.node['ptwobrussell(user)'])
-
-print(g['ptwobrussell(user)']['Mining-the-Social-Web(repo)'])
-
-
-
-print(g.in_edges(['ptwobrussell(user)']))
-print(g.out_edges(['ptwobrussell(user)']))
-
-
-
-print(g.in_edges(['Mining-the-Social-Web(repo)']))
-print(g.out_edges(['Mining-the-Social-Web(repo)']))
-
-
-kkg = nx.generators.small.krackhardt_kite_graph()
-
-print("Degree Centrality")
-print(sorted(nx.degree_centrality(kkg).items(), 
-             key=itemgetter(1), reverse=True))
-print()
-
-print("Betweenness Centrality")
-print(sorted(nx.betweenness_centrality(kkg).items(), 
-             key=itemgetter(1), reverse=True))
-print()
-
-print("Closeness Centrality")
-print(sorted(nx.closeness_centrality(kkg).items(), 
-             key=itemgetter(1), reverse=True))

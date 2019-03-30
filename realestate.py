@@ -151,7 +151,7 @@ def get_lat_lon(location):
     
         return (lat, lng)
     except:
-        return (0.0, None)
+        return (0.0, 0.0)
 ## Geocoding address to lat lon and assign to dataframe columns
         
 data[['latitude', 'longitude']] = data.apply(lambda row :pd.Series(get_lat_lon(row['location'])), axis=1)    

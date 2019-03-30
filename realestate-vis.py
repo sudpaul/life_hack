@@ -25,3 +25,4 @@ for lt, ln, el in zip(lat, lon, price):
 map.add_child(fg)
 map.save("Map_html_popup_simple.html")
 map
+

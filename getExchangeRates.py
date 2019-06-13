@@ -48,7 +48,7 @@ def get_data(date):
     '''
     import requests
     
-    key = api_key('fixer_io.txt')
+    key = api_key('../fixer_io.txt')
     base_url ="http://data.fixer.io/api/{find}?access_key={k}".format(find=date,k=key)
     
         
@@ -68,10 +68,12 @@ def get_data(date):
     except:
           return 0
     
-def exchange_rate():
+def exchange_rate(base='AUD'):
     '''Return latest exchange rate of 168 currencies base currency ERU'''
-    
-    return get_data('latest')
+    currency = get_data('latest')
+    usd = currency['rates']['USD']
+    rate = currency['rates'][base]/usd
+    return f'1 USD change to {base} {rate:.3f}' 
    
     
     

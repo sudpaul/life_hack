@@ -89,7 +89,10 @@ def compareMortgages(amount, years, fixedRate, pts, ptsRate, varRate1,
     for m in range(total_months):
         for mort in mortgages:
             mort.makePayment()
-    plotMortgages(mortgages, amount)
+    #plotMortgages(mortgages, amount)
+    for m in mortgages:
+        print (m)
+        print (' Total payments = $' + str(int(m.getTotalPaid())))
         
 # Visulisation 
 import numpy as np

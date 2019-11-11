@@ -12,11 +12,11 @@ def api_key(file_name):
         key = f.read().strip()
     return key
 
-def api_query(api_file): 
+def api_query(api_file, isbn13): 
      
     key = api_key(api_file)
-    base_url ="https://www.goodreads.com/book/title.json"
-    query = {"key": key, 'format':'json',"title": "Outliers"}
+    base_url ="https://www.goodreads.com/book/review_counts.json"
+    query = {"key":key,"isbns": isbn13}
     try:
         response = requests.get(url=base_url, params=query)
         if not response.status_code == 200:

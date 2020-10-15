@@ -76,7 +76,12 @@ def exchange_rate(base='AUD'):
     return f'1 USD change to {base} {rate:.3f}' 
    
     
-    
+def convert_currency(base,change_currency, amount):
+    currency = get_data('latest').get('rates')
+    base_currency = currency[base]
+    dest_currency  = currency[change_currency]
+    return round((dest_currency/base_currency)*amount,2)
+
     
     
       

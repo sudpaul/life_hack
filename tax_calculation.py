@@ -26,7 +26,7 @@ def compute_tax(income):
     tax = (income - previous_cutoff) * percent + additive
     return tax, percent
 
-def main():
+def run():
     
     year = datetime.now().year
     next_year = str((datetime.today()+ timedelta(days=365)).year)[2:]
@@ -42,13 +42,15 @@ def main():
     total_tax = income_tax + medicare_levey
     effective_rate = 100*(total_tax/gross)
     rate_percent = 100*marginal_rate
+    net_income = gross - (income_tax + medicare_levey)
+    print(f"{'Total taxable income:':>35} ${gross}\n")
     
-    print(f'Total tax payable amount $ {gross}')
-    print(f'Marginal tax rate {rate_percent}%')
-    print(f'Income tax $ {income_tax:.2f}')
+    print(f'Income tax payable ${income_tax:.2f}')
     print(f'Medicare levey $ {medicare_levey:.2f}')
-    print(f'Total tax $ {total_tax:.2f}')
-    print(f'Effective tax rate {effective_rate:.2f}%')
+    print(f'Total tax $ {total_tax:.2f}\n')
+    
+    print(f'Net income after tax & Medicare levy: ${net_income:.2f}')
+    print(f'Marginal tax rate {rate_percent}%')
     
 if __name__ == '__main__':
-    main()
+    run()

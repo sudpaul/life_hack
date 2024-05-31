@@ -10,10 +10,10 @@ def compute_tax(income):
     # S is reused from the previous iteration of the loop
     
     tax_brackets = [
-        (18200, 0, 0), (45000, 0.19, 0), (120000, 0.325, 5092), (180000, 0.37, 29464)
+        (18200, 0, 0), (45000, 0.16, 0), (135000, 0.30, 4288), (190000, 0.37, 31288)
     ]
     # The final bracket, use if the income is bigger than any cutoff
-    highest_bracket = (None, 0.45, 51666)
+    highest_bracket = (None, 0.45, 51637)
     previous_cutoff = 0
     for cutoff, percent, additive in tax_brackets:
         if income <= cutoff:

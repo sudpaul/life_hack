@@ -4,6 +4,15 @@ from rich.console import Console
 from rich.table import Table
 
 def compute_tax(income: int) -> Tuple[float, float]:
+    """
+    Compute the income tax based on predefined tax brackets.
+
+    Args:
+        income (int): The total taxable income.
+
+    Returns:
+        Tuple[float, float]: A tuple containing the calculated tax and the marginal tax rate.
+    """
     tax_brackets = [
         (18200, 0, 0), (45000, 0.16, 0), (135000, 0.30, 4288), (190000, 0.37, 31288)
     ]
@@ -21,6 +30,12 @@ def compute_tax(income: int) -> Tuple[float, float]:
     return tax, percent
 
 def run() -> None:
+    """
+    Run the tax calculation program.
+
+    Prompts the user to enter their yearly gross income, computes the tax,
+    and displays a summary using a formatted table.
+    """
     console = Console()
     
     year = datetime.now().year

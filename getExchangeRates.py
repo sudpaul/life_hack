@@ -4,6 +4,7 @@ Created on Tue Dec 18 14:44:57 2018
 
 @author: z3525552
 """
+import requests
 def api_key(file_name):
     
     '''Input is api file and return the access key
@@ -46,8 +47,7 @@ def get_data(date):
             http failure 0
             
     '''
-    import requests
-    
+        
     key = api_key('../fixer_io.txt')
     base_url ="http://data.fixer.io/api/{find}?access_key={k}".format(find=date,k=key)
     

@@ -16,7 +16,7 @@ def compute_tax(income: int) -> Tuple[float, float]:
     tax_brackets = [
         (18200, 0, 0), (45000, 0.16, 0), (135000, 0.30, 4288), (190000, 0.37, 31288)
     ]
-    # Australian resident individual tax rates for 2025-26
+    # Australian resident individual tax rates for
     # $0 – $18,200: Nil (Tax-Free Threshold)
     # $18,201 – $45,000: 16 cents for each $1 over $18,200
     # $45,001 – $135,000: $4,288 plus 30 cents for each $1 over $45,000

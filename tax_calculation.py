@@ -16,6 +16,12 @@ def compute_tax(income: int) -> Tuple[float, float]:
     tax_brackets = [
         (18200, 0, 0), (45000, 0.16, 0), (135000, 0.30, 4288), (190000, 0.37, 31288)
     ]
+    # Australian resident individual tax rates for 2025-26
+    # $0 – $18,200: Nil (Tax-Free Threshold)
+    # $18,201 – $45,000: 16 cents for each $1 over $18,200
+    # $45,001 – $135,000: $4,288 plus 30 cents for each $1 over $45,000
+    # $135,001 – $190,000: $31,288 plus 37 cents for each $1 over $135,000
+    # $190,001 and over: $51,538 plus 45 cents for each $1 over $190,000 
     highest_bracket = (None, 0.45, 51637)
     previous_cutoff = 0
     
@@ -38,8 +44,8 @@ def run() -> None:
     """
     console = Console()
     
-    year = datetime.now().year
-    next_year = str((datetime.today() + timedelta(days=365)).year)[2:]
+    current_year = datetime.now().year
+    previous_year = str((datetime.today() + timedelta(days=-365)).year)[2:]
     
     income = input(f"Enter yearly gross remuneration for tax calculation: ")
     gross = int(income)
@@ -51,7 +57,7 @@ def run() -> None:
     rate_percent = 100 * marginal_rate
     net_income = gross - total_tax
     
-    heading = f'Your tax summary for income year {year}-{next_year}'
+    heading = f'Your tax summary for income year {current_year}-{previous_year}'
     
     table = Table(title=heading)
     
